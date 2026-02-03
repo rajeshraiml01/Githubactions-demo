@@ -1,0 +1,18 @@
+name: 02 Outputs and Needs
+
+on: [workflow_dispatch]
+
+jobs:
+  make-output:
+    runs-on: ubuntu-latest
+    outputs:
+      short_sha: ${{ steps.out.outputs.short_sha }}
+    steps:
+      - id: out
+        run: echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+  use-output:
+    runs-on: ubuntu-latest
+    needs: make-output
+    steps:
+      - run: echo "Short SHA from previous job = ${{ needs.make-output.outputs.short_sha }}"
