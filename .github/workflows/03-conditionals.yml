@@ -1,0 +1,26 @@
+name: 09 Conditionals
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_extra:
+        type: boolean
+        default: false
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Always runs."
+
+      - name: Only on main branch
+        if: ${{ github.ref == 'refs/heads/main' }}
+        run: echo "On main branch."
+
+      - name: Only if input true
+        if: ${{ inputs.run_extra == true }}
+        run: echo "Extra step ran because run_extra=true"
+
+      - name: Always (even if previous fails)
+        if: ${{ always() }}
+        run: echo "Cleanup-like step."
