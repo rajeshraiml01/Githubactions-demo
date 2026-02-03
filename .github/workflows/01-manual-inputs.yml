@@ -1,0 +1,22 @@
+name: 01 Manual Inputs
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        default: "World"
+      excited:
+        type: boolean
+        default: true
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          msg="Hello ${{ inputs.name }}"
+          if [ "${{ inputs.excited }}" = "true" ]; then msg="$msg!!"; fi
+          echo "$msg"
+          echo "## Greeting" >> "$GITHUB_STEP_SUMMARY"
+          echo "$msg" >> "$GITHUB_STEP_SUMMARY"
