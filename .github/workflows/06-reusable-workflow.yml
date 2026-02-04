@@ -1,0 +1,14 @@
+name: 06 Reusable Called
+
+on:
+  workflow_call:
+    inputs:
+      who:
+        type: string
+        required: true
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello from reusable workflow, ${{ inputs.who }}!"
