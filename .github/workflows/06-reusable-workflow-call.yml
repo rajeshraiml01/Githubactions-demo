@@ -1,0 +1,10 @@
+name: 06 Reusable Caller
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call:
+    uses: ./.github/workflows/10-reusable-called.yml
+    with:
+      who: ${{ github.actor }}
